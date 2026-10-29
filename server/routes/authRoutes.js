@@ -1,0 +1,31 @@
+
+import express from "express";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
+import { protect } from "../middleware/auth.js";
+import asyncHandler from "../middleware/asyncHandler.js";
+
+const router = express.Router();
+const genToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+
+router.post("/register", asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
+  const exists = await User.findOne({ email });
+  if (exists) return res.status(400).json({ message: "Email already registered" });
+  const user = await User.create({ name, email, password });
+  res.status(201).json({ token: genToken(user._id), user: { id: user._id, name, email, role: user.role } });
+}));
+
+router.post("/login", asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (user && (await user.matchPassword(password))) {
+    res.json({ token: genToken(user._id), user: { id: user._id, name: user.name, email, role: user.role } });
+  } else {
+    res.status(401).json({ message: "Invalid email or password" });
+  }
+}));
+
+router.get("/me", protect, asyncHandler(async (req, res) => res.json(req.user)));
+
+export default router;

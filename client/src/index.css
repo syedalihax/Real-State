@@ -1,0 +1,143 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --brand-red: #e11d48;
+    --brand-red-dark: #be123c;
+    --brand-slate: #0f172a;
+    --brand-slate-soft: #f8fafc;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-slate-100 font-sans text-slate-900 antialiased;
+  }
+
+  a {
+    @apply no-underline;
+  }
+
+  img {
+    @apply block max-w-full;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900;
+  }
+
+  .btn-primary {
+    @apply btn;
+  }
+
+  .btn-secondary {
+    @apply btn-outline;
+  }
+
+  .form-card {
+    @apply mx-auto max-w-xl rounded-3xl border border-slate-200 bg-white p-5 shadow-soft sm:p-8;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-semibold text-slate-700;
+  }
+
+  .input-shell {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+  }
+
+  .search-bar {
+    @apply flex flex-col gap-3 rounded-2xl bg-white/95 p-3 shadow-soft md:flex-row;
+  }
+
+  .search-bar select,
+  .search-bar input {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100 md:min-w-0;
+  }
+
+  .input-icon {
+    @apply relative;
+  }
+
+  .input-icon svg {
+    @apply pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400;
+  }
+
+  .input-icon input {
+    @apply input-shell pl-10;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em];
+  }
+
+  .tag.active {
+    @apply bg-emerald-100 text-emerald-700;
+  }
+
+  .tag.sold {
+    @apply bg-rose-100 text-rose-700;
+  }
+
+  .tag.rented {
+    @apply bg-amber-100 text-amber-700;
+  }
+
+  .tag.draft {
+    @apply bg-slate-200 text-slate-600;
+  }
+
+}
+
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .shadow-soft {
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  }
+}
+
+body {
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #e2e8f0; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
